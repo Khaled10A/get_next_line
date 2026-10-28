@@ -6,7 +6,7 @@
 /*   By: kalnajja <kalnajja@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 12:25:24 by kalnajja          #+#    #+#             */
-/*   Updated: 2026/10/28 10:54:31 by kalnajja         ###   ########.fr       */
+/*   Updated: 2026/10/28 11:26:18 by kalnajja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,17 @@ static char	*ft_get_result(char **stash)
 
 char	*get_next_line(int fd)
 {
-	static char	*stash;
+	static char	*stash[1024];
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (ft_read_stash(fd, &stash) == NULL)
+	if (ft_read_stash(fd, &stash[fd]) == NULL)
 		return (NULL);
-	if (!stash || stash[0] == '\0')
+	if (!stash[fd] || stash[fd][0] == '\0')
 	{
-		free(stash);
-		stash = NULL;
+		free(stash[fd]);
+		stash[fd] = NULL;
 		return (NULL);
 	}
-	return (ft_get_result(&stash));
+	return (ft_get_result(&stash[fd]));
 }
