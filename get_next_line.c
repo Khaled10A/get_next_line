@@ -6,7 +6,7 @@
 /*   By: kalnajja <kalnajja@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 12:25:24 by kalnajja          #+#    #+#             */
-/*   Updated: 2026/10/28 13:55:31 by kalnajja         ###   ########.fr       */
+/*   Updated: 2026/10/28 14:11:41 by kalnajja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static char	*ft_get_result(char **stash)
 
 	line = ft_get_line(*stash);
 	if (!line)
-		return (NULL);
+		return (ft_error(NULL, stash));
 	temp = ft_new_stash(*stash);
 	if (!temp)
 	{
@@ -79,7 +79,7 @@ char	*get_next_line(int fd)
 {
 	static char	*stash;
 
-	if (fd < 0 || fd >= 1024 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (ft_read_stash(fd, &stash) == NULL)
 		return (NULL);
