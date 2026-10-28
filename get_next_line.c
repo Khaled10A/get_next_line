@@ -6,15 +6,17 @@
 /*   By: kalnajja <kalnajja@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 12:25:24 by kalnajja          #+#    #+#             */
-/*   Updated: 2026/10/27 16:15:47 by kalnajja         ###   ########.fr       */
+/*   Updated: 2026/10/28 10:54:31 by kalnajja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*ft_error(char *buffer)
+static char	*ft_error(char *buffer, char **stash)
 {
 	free(buffer);
+	free(*stash);
+	*stash = NULL;
 	return (NULL);
 }
 
@@ -44,14 +46,9 @@ static char	*ft_read_stash(int fd, char **stash)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
-		{
-			free(buffer);
-			free(*stash);
-			*stash = NULL;
-			return (NULL);
-		}
+			return (ft_error(buffer, stash));
 		if (bytes_read > 0 && !ft_update_stash(stash, buffer, bytes_read))
-			return (ft_error(buffer));
+			return (ft_error(buffer, stash));
 	}
 	free(buffer);
 	return (*stash);
