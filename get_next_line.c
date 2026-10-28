@@ -6,7 +6,7 @@
 /*   By: kalnajja <kalnajja@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/19 12:25:24 by kalnajja          #+#    #+#             */
-/*   Updated: 2026/10/28 11:26:18 by kalnajja         ###   ########.fr       */
+/*   Updated: 2026/10/28 13:55:31 by kalnajja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	*ft_read_stash(int fd, char **stash)
 
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
-		return (NULL);
+		return (ft_error(buffer, stash));
 	bytes_read = 1;
 	while (ft_strchr(*stash, '\n') == NULL && bytes_read != 0)
 	{
@@ -66,6 +66,8 @@ static char	*ft_get_result(char **stash)
 	if (!temp)
 	{
 		free(line);
+		free(*stash);
+		*stash = NULL;
 		return (NULL);
 	}
 	free(*stash);
@@ -75,17 +77,17 @@ static char	*ft_get_result(char **stash)
 
 char	*get_next_line(int fd)
 {
-	static char	*stash[1024];
+	static char	*stash;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd >= 1024 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (ft_read_stash(fd, &stash[fd]) == NULL)
+	if (ft_read_stash(fd, &stash) == NULL)
 		return (NULL);
-	if (!stash[fd] || stash[fd][0] == '\0')
+	if (!stash || stash[0] == '\0')
 	{
-		free(stash[fd]);
-		stash[fd] = NULL;
+		free(stash);
+		stash = NULL;
 		return (NULL);
 	}
-	return (ft_get_result(&stash[fd]));
+	return (ft_get_result(&stash));
 }
