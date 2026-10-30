@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: kalnajja <kalnajja@student.42amman.com>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/28 14:02:53 by kalnajja          #+#    #+#             */
-/*   Updated: 2026/10/28 14:02:53 by kalnajja         ###   ########.fr       */
+/*                                                       :::      ::::::::    */
+/*   get_next_line_bonus.c                             :+:      :+:    :+:    */
+/*                                                   +:+ +:+         +:+      */
+/*   By: kalnajja <kalnajja@student.42amman.com>   #+#  +:+       +#+         */
+/*                                               +#+#+#+#+#+   +#+            */
+/*   Created: 2026/10/28 14:02:53 by kalnajja         #+#    #+#              */
+/*   Updated: 2026/10/30 10:54:03 by kalnajja        ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,3 +89,35 @@ char	*get_next_line(int fd)
 	}
 	return (ft_get_result(&stash[fd]));
 }
+/*
+#include "get_next_line_bonus.h"
+#include <fcntl.h>
+#include <stdio.h>
+
+int	main(void)
+{
+int		fd1;
+int		fd2;
+char	*line;
+
+fd1 = open("test1.txt", O_RDONLY);
+fd2 = open("test2.txt", O_RDONLY);
+line = get_next_line(fd1);
+while (line)
+{
+printf("fd1: %s", line);
+free(line);
+line = get_next_line(fd1);
+}
+line = get_next_line(fd2);
+while (line)
+{
+printf("fd2: %s", line);
+free(line);
+line = get_next_line(fd2);
+}
+close(fd1);
+close(fd2);
+return (0);
+}
+}*/

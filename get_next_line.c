@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: kalnajja <kalnajja@student.42amman.com>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/19 12:25:24 by kalnajja          #+#    #+#             */
-/*   Updated: 2026/10/28 14:11:41 by kalnajja         ###   ########.fr       */
+/*                                                       :::      ::::::::    */
+/*   get_next_line.c                                   :+:      :+:    :+:    */
+/*                                                   +:+ +:+         +:+      */
+/*   By: kalnajja <kalnajja@student.42amman.com>   #+#  +:+       +#+         */
+/*                                               +#+#+#+#+#+   +#+            */
+/*   Created: 2026/10/19 12:25:24 by kalnajja         #+#    #+#              */
+/*   Updated: 2026/10/30 10:53:08 by kalnajja        ###   ########.fr        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,3 +91,25 @@ char	*get_next_line(int fd)
 	}
 	return (ft_get_result(&stash));
 }
+/*
+#include "get_next_line.h"
+#include <fcntl.h>
+#include <stdio.h>
+
+int	main(void)
+{
+int		fd;
+char	*line;
+
+fd = open("test.txt", O_RDONLY);
+line = get_next_line(fd);
+while (line)
+{
+printf("%s", line);
+free(line);
+line = get_next_line(fd);
+}
+close(fd);
+return (0);
+}
+*/

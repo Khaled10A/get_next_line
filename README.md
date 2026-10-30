@@ -164,7 +164,7 @@ mixing their reading state. File descriptors outside the range `0..1023` return
 
 ### Use of AI
 
-AI (Claude) was used as a support tool, **after** the first implementation was
+AI was used as a support tool, **after** the first implementation was
 written, for these tasks:
 
 - **Code review**: finding memory-leak paths when `malloc` fails
